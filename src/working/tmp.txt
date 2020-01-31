@@ -9,6 +9,9 @@ run netstat -o to see which ports on your machine are in use
 
 
 docker run --rm -v "C:/Users/alshee/work/EnterpriseCloudFramework/src/working" openapitools/openapi-generator-cli generate \
-    -i https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/2_0/petstore.yaml \
-    -g go \
-    -o /local/out/go
+    -i https://raw.githubusercontent.com/alsheehan/EnterpriseCloudFramework/master/apis/ecp/alpha/ecp-v0-0-1.json \
+    -g python \
+    -o "C:/Users/alshee/work/EnterpriseCloudFramework/src/working/python"
+
+
+https://raw.githubusercontent.com/alsheehan/EnterpriseCloudFramework/master/apis/ecp/alpha/ecp-v0-0-1.json
