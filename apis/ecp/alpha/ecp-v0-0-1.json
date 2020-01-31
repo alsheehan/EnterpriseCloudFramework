@@ -1074,7 +1074,7 @@
             "put": {
                 "summary": "Registers a Public Cloud that this API Server wishes to continually assure",
                 "description": "The API Server has a dependecy inversion with respect to the management of any cloud. The Operator Resource is the method by which the continued evolution and expansion of Cloud Management can occur and the API Server can 'git-pull' into its operational scope.",
-                "operationId": "set-OperatorRepo",
+                "operationId": "set-PublicCloud",
                 "tags": [
                     "PublicClouds"
                 ],
@@ -1103,16 +1103,11 @@
                 "tags": [
                     "PublicClouds"
                 ],
-                "parameters": [],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/publicCloudAPISpecObject"
-                            }
-                        }
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/PublicCloudAPISpecName"
                     }
-                },
+                ],
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -1133,7 +1128,11 @@
                 "tags": [
                     "PublicClouds"
                 ],
-                "parameters": [],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/PublicCloudAPISpecName"
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {

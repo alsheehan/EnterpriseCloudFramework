@@ -7,7 +7,7 @@ Software, the internet and API's are foreign concepts to the majority of the glo
 
 ## The Hardware of Today
 
-Since the beginning of the Industrial Revolution in the late 1700's - the Mechanical Hardware mental model has shaped how states and corporations operate.
+Since the beginning of the Industrial Revolution in the late 1700's - the Mechanical Hardware mental model has shaped how states and corporations operate. Governed by the Laws of Newtonian physics - 
 
 ## The Software Of Tomorrow
 
