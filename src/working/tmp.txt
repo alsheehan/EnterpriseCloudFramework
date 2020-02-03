@@ -7,11 +7,13 @@ docker run -d -e GENERATOR_HOST=http://localhost -p 80:8080 openapitools/openapi
 run netstat -o to see which ports on your machine are in use
 
 
+-v ${PWD}:/local
+-v C:/Users/alshee/work/EnterpriseCloudFramework/src:/working
 
-docker run --rm -v "C:/Users/alshee/work/EnterpriseCloudFramework/src/working" openapitools/openapi-generator-cli generate \
-    -i https://raw.githubusercontent.com/alsheehan/EnterpriseCloudFramework/master/apis/ecp/alpha/ecp-v0-0-1.json \
-    -g python \
-    -o "C:/Users/alshee/work/EnterpriseCloudFramework/src/working/python"
+docker run --rm -v C:/Users/alshee/work/EnterpriseCloudFramework/src:/working openapitools/openapi-generator-cli generate -i https://raw.githubusercontent.com/alsheehan/EnterpriseCloudFramework/master/apis/ecp/alpha/ecp-v0-0-1-codegen.json -g python -o working/out/python/client --skip-validate-spec
 
 
-https://raw.githubusercontent.com/alsheehan/EnterpriseCloudFramework/master/apis/ecp/alpha/ecp-v0-0-1.json
+docker run --rm -v C:/Users/alshee/work/EnterpriseCloudFramework/src:/working openapitools/openapi-generator-cli generate -i https://raw.githubusercontent.com/alsheehan/EnterpriseCloudFramework/master/apis/ecp/alpha/ecp-v0-0-1-codegen.json -g python-flask -o working/out/python/server --skip-validate-spec
+
+
+wsl wslpath -a 'C:\\Users\alshee\\work\\EnterpriseCloudFramework\\src\\working\\python'

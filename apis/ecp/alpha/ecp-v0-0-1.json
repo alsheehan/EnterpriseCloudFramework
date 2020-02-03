@@ -768,7 +768,7 @@
                 "description": "The Operator performs the inversion of dependency on the cloud provider. When a Space is being changed - the Operator contains this logic/knowledge - and must be set at the space level before it can then be applied gradually across the stages. This operation will send a space object that contains the unique name of the space and the operator uri - the operator uri is a fully qualified resource",
                 "operationId": "update-OperatorVersionForSpace",
                 "tags": [
-                    "Operators"
+                    "DigitalOperators"
                 ],
                 "parameters": [
                     {
@@ -815,7 +815,7 @@
                 "description": "This endpoint returns all opertors that the API Server knows about. This is the full list of Operators and is intended to grow as the community adds/extends operators across clouds, tooling, kinds and versions ",
                 "operationId": "get-KnownOperators",
                 "tags": [
-                    "Operators"
+                    "DigitalOperators"
                 ],
                 "parameters": [
                     {
@@ -911,7 +911,7 @@
                 "description": "This endpoint will REGISTER new Operators with the API Server",
                 "operationId": "register-OperatorInstance",
                 "tags": [
-                    "Operators"
+                    "DigitalOperators"
                 ],
                 "parameters": [],
                 "requestBody": {
@@ -936,7 +936,7 @@
                 "description": "Returns the list of Operators that are Registered with this API Server Instance. These Operators are available for use within the Control Plane. ",
                 "operationId": "get-RegisteredOperators",
                 "tags": [
-                    "Operators"
+                    "DigitalOperators"
                 ],
                 "parameters": [
                     {
@@ -966,7 +966,7 @@
                 "description": "This endpoint will UNREGISTER new Operators with the API Server",
                 "operationId": "unregister-OperatorInstance",
                 "tags": [
-                    "Operators"
+                    "DigitalOperators"
                 ],
                 "parameters": [],
                 "requestBody": {
@@ -991,7 +991,7 @@
                 "description": "The API Server has a dependecy inversion with respect to the management of any cloud. The Operator Resource is the method by which the continued evolution and expansion of Cloud Management can occur and the API Server can 'git-pull' into its operational scope.",
                 "operationId": "get-OperatorRepos",
                 "tags": [
-                    "Operators"
+                    "DigitalOperators"
                 ],
                 "parameters": [],
                 "responses": {
@@ -1012,7 +1012,7 @@
                 "description": "The API Server has a dependecy inversion with respect to the management of any cloud. The Operator Resource is the method by which the continued evolution and expansion of Cloud Management can occur and the API Server can 'git-pull' into its operational scope.",
                 "operationId": "set-OperatorRepo",
                 "tags": [
-                    "Operators"
+                    "DigitalOperators"
                 ],
                 "parameters": [],
                 "responses": {
@@ -1035,7 +1035,7 @@
                 "description": "The API Server has a dependecy inversion with respect to the management of any cloud. The Operator Resource is the method by which the continued evolution and expansion of Cloud Management can occur and the API Server can 'git-pull' into its operational scope.",
                 "operationId": "gitpull-OperatorRepo",
                 "tags": [
-                    "Operators"
+                    "DigitalOperators"
                 ],
                 "parameters": [
                     {
@@ -1353,7 +1353,8 @@
                 "enum": [
                     "architecture",
                     "control",
-                    "entitlement"
+                    "entitlement",
+                    "all"
                 ]
             },
             "operatorVersion": {
