@@ -34,7 +34,7 @@
         "/enterpriseGraph": {
             "get": {
                 "summary": "GET the Enterprise Graph of Dependencies",
-                "description": "TODO: Create Examples that convey dependency - the change sequence must also be informational. The Enterprise Graph represents the global view of all governed spaces within a specific: <br> <div> <li> <b> Enterprise Cloud platformName </b> (representing the enterprise's platform name for the version or generation of service offering) & <div/> <div> <li> <b>Public/Private Cloud providerName </b> (azr, aws, gcp etc). <div/> <br/> <br> A Space is a multy cloud abstraction that is a unit of Governance and Accountability. <br/> <br> Each Space is of a specific kind and consists of a sequence of stages - the purpose of which is to manage for the controlled, deterministic and reversible application of change. <br/> <br> The objective of the graph is to establish a mechanism for intentionally placing and remembering/visualising every <br> <li>Boundary of accountability, <br> <li>Stages of change within this boundary and <br> <li>The dependency graph for each stage of change<br/> so that all Enterprise consumption of   Any Cloud API's can be holistically managed and governed. <br/> <br> By definition, any usage of any Cloud API's outside of the Graph is considered unmanaged. <br/> <br>By managing the spaces and intentionally placing Stages into a Dependency Graph, the Enterprise can know and manage its risk of 'Cloud API usage' & 'Continuous Change' across any cloud",
+                "description": "TODO: Create Examples that convey dependency - the change sequence must also be informational. The Enterprise Graph represents the global view of all governed Environments within a specific: <br> <div> <li> <b> Enterprise Cloud platformName </b> (representing the enterprise's platform name for the version or generation of service offering) & <div/> <div> <li> <b>Public/Private Cloud providerName </b> (azr, aws, gcp etc). <div/> <br/> <br> An Environment is a multy cloud abstraction that is a unit of Governance and Accountability. <br/> <br> Each Environment is of a specific kind and consists of a sequence of stages - the purpose of which is to manage for the controlled, deterministic and reversible application of change. <br/> <br> The objective of the graph is to establish a mechanism for intentionally placing and remembering/visualising every <br> <li>Boundary of accountability, <br> <li>Stages of change within this boundary and <br> <li>The dependency graph for each stage of change<br/> so that all Enterprise consumption of   Any Cloud API's can be holistically managed and governed. <br/> <br> By definition, any usage of any Cloud API's outside of the Graph is considered unmanaged. <br/> <br>By managing the Environments and intentionally placing Stages into a Dependency Graph, the Enterprise can know and manage its risk of 'Cloud API usage' & 'Continuous Change' across any cloud",
                 "operationId": "get-GraphForEnterprise",
                 "tags": [
                     "EnterpriseGraph"
@@ -46,7 +46,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/spaceObjectList"
+                                    "$ref": "#/components/schemas/envObjectList"
                                 },
                                 "examples": {}
                             }
@@ -55,17 +55,17 @@
                 }
             }
         },
-        "/enterpriseGraph/spaces/{UniqueSpaceName}": {
+        "/enterpriseGraph/environments/{UniqueEnvName}": {
             "get": {
-                "summary": "Returns the dependency graph for all stages within a specific space",
-                "description": "Each Stage within a Space has a list of 'impact stages' and 'dependency stages'. Any change that is applied to this stage has the impact radius defined. This endpoint also knows the list of stages where changes could impact this stage",
-                "operationId": "get-GraphForSpace",
+                "summary": "Returns the dependency graph for all stages within a specific Environment",
+                "description": "Each Stage within an Environment has a list of 'impact stages' and 'dependency stages'. Any change that is applied to this stage has the impact radius defined. This endpoint also knows the list of stages where changes could impact this stage",
+                "operationId": "get-GraphForEnvironment",
                 "tags": [
                     "EnterpriseGraph"
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     }
                 ],
                 "responses": {
@@ -75,17 +75,17 @@
                 }
             }
         },
-        "/enterpriseGraph/spaces/{UniqueSpaceName}/stages/{UniqueStageName}": {
+        "/enterpriseGraph/environments/{UniqueEnvName}/stages/{UniqueStageName}": {
             "get": {
-                "summary": "Returns the dependency graph for a specific stage within a space",
-                "description": "Each Stage within a Space has a list of 'impact stages' and 'dependency stages'. Any change that is applied to this stage has the impact radius defined. This endpoint also knows the list of stages where changes could impact this stage",
+                "summary": "Returns the dependency graph for a specific stage within an Environment",
+                "description": "Each Stage within an Environment has a list of 'impact stages' and 'dependency stages'. Any change that is applied to this stage has the impact radius defined. This endpoint also knows the list of stages where changes could impact this stage",
                 "operationId": "get-GraphForStage",
                 "tags": [
                     "EnterpriseGraph"
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     },
                     {
                         "$ref": "#/components/parameters/UniqueStageName"
@@ -98,13 +98,13 @@
                 }
             }
         },
-        "/spaces": {
+        "/environments": {
             "get": {
-                "summary": "GET Spaces endpoint",
-                "description": "Returns a list of Space Names",
-                "operationId": "get-Spaces",
+                "summary": "GET Environments endpoint",
+                "description": "Returns a list of Environment Names",
+                "operationId": "get-Environments",
                 "tags": [
-                    "Spaces"
+                    "Environments"
                 ],
                 "parameters": [
                     {
@@ -112,7 +112,7 @@
                         "in": "query",
                         "required": false,
                         "schema": {
-                            "$ref": "#/components/schemas/spaceKind"
+                            "$ref": "#/components/schemas/envKind"
                         }
                     }
                 ],
@@ -122,24 +122,24 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/spaceObjectList"
+                                    "$ref": "#/components/schemas/envObjectList"
                                 },
                                 "examples": {
-                                    "coreSpaces": {
+                                    "coreEnvironments": {
                                         "value": {
-                                            "spaceObjectList": [
+                                            "envObjectList": [
                                                 {
-                                                    "spaceObjectkind": {
+                                                    "envObjectkind": {
                                                         "kind": "core",
                                                         "layer": "0"
                                                     },
-                                                    "spaceObjectList": [
+                                                    "envObjectList": [
                                                         {
-                                                            "spaceName": "ga-nonp",
+                                                            "envName": "ga-nonp",
                                                             "operatorUri": "../../../src/modules/scaffolding/t0_kore_operators/single_sub_kore_v0_1"
                                                         },
                                                         {
-                                                            "spaceName": "ga-prod",
+                                                            "envName": "ga-prod",
                                                             "operatorUri": "../../../src/modules/scaffolding/t0_kore_operators/single_sub_kore_v0_1"
                                                         }
                                                     ]
@@ -147,21 +147,21 @@
                                             ]
                                         }
                                     },
-                                    "kernelSpaces": {
+                                    "kernelEnvironments": {
                                         "value": {
-                                            "spaceObjectList": [
+                                            "envObjectList": [
                                                 {
-                                                    "spaceObjectkind": {
+                                                    "envObjectkind": {
                                                         "kind": "kernel",
                                                         "layer": "1"
                                                     },
-                                                    "spaceObjectList": [
+                                                    "envObjectList": [
                                                         {
-                                                            "spaceName": "ks01",
+                                                            "envName": "ks01",
                                                             "operatorUri": "../../../../src/modules/scaffolding/t1_kernel_operators/single_sub_kernel_v0_1"
                                                         },
                                                         {
-                                                            "spaceName": "ks02",
+                                                            "envName": "ks02",
                                                             "operatorUri": "../../../../src/modules/scaffolding/t1_kernel_operators/single_sub_kernel_v0_1"
                                                         }
                                                     ]
@@ -169,25 +169,25 @@
                                             ]
                                         }
                                     },
-                                    "tenantSpaces": {
+                                    "tenantEnvironments": {
                                         "value": {
-                                            "spaceObjectList": [
+                                            "envObjectList": [
                                                 {
-                                                    "spaceObjectkind": {
+                                                    "envObjectkind": {
                                                         "kind": "tenant",
                                                         "layer": "2"
                                                     },
-                                                    "spaceObjectList": [
+                                                    "envObjectList": [
                                                         {
-                                                            "spaceName": "retail-bank",
+                                                            "envName": "retail-bank",
                                                             "operatorUri": "../../../../src/modules/scaffolding/t2_tenant_operators/single_sub_tenant_v0_1"
                                                         },
                                                         {
-                                                            "spaceName": "invest-bank",
+                                                            "envName": "invest-bank",
                                                             "operatorUri": "../../../../src/modules/scaffolding/t2_tenant_operators/single_sub_tenant_v0_1"
                                                         },
                                                         {
-                                                            "spaceName": "business-bank",
+                                                            "envName": "business-bank",
                                                             "operatorUri": "../../../../src/modules/scaffolding/t2_tenant_operators/single_sub_tenant_v0_1"
                                                         }
                                                     ]
@@ -195,57 +195,57 @@
                                             ]
                                         }
                                     },
-                                    "graphOfSpaces": {
+                                    "graphOfEnvironments": {
                                         "value": {
-                                            "spaceObjectList": [
+                                            "envObjectList": [
                                                 {
-                                                    "spaceObjectkind": {
+                                                    "envObjectkind": {
                                                         "kind": "core",
                                                         "layer": "0"
                                                     },
-                                                    "spaceObjectList": [
+                                                    "envObjectList": [
                                                         {
-                                                            "spaceName": "ga-nonp",
+                                                            "envName": "ga-nonp",
                                                             "operatorUri": "../../../src/modules/scaffolding/t0_kore_operators/single_sub_kore_v0_1"
                                                         },
                                                         {
-                                                            "spaceName": "ga-prod",
+                                                            "envName": "ga-prod",
                                                             "operatorUri": "../../../src/modules/scaffolding/t0_kore_operators/single_sub_kore_v0_1"
                                                         }
                                                     ]
                                                 },
                                                 {
-                                                    "spaceObjectkind": {
+                                                    "envObjectkind": {
                                                         "kind": "kernel",
                                                         "layer": "1"
                                                     },
-                                                    "spaceObjectList": [
+                                                    "envObjectList": [
                                                         {
-                                                            "spaceName": "ks01",
+                                                            "envName": "ks01",
                                                             "operatorUri": "../../../../src/modules/scaffolding/t1_kernel_operators/single_sub_kernel_v0_1"
                                                         },
                                                         {
-                                                            "spaceName": "ks02",
+                                                            "envName": "ks02",
                                                             "operatorUri": "../../../../src/modules/scaffolding/t1_kernel_operators/single_sub_kernel_v0_1"
                                                         }
                                                     ]
                                                 },
                                                 {
-                                                    "spaceObjectkind": {
+                                                    "envObjectkind": {
                                                         "kind": "tenant",
                                                         "layer": "2"
                                                     },
-                                                    "spaceObjectList": [
+                                                    "envObjectList": [
                                                         {
-                                                            "spaceName": "retail-bank",
+                                                            "envName": "retail-bank",
                                                             "operatorUri": "../../../../src/modules/scaffolding/t2_tenant_operators/single_sub_tenant_v0_1"
                                                         },
                                                         {
-                                                            "spaceName": "invest-bank",
+                                                            "envName": "invest-bank",
                                                             "operatorUri": "../../../../src/modules/scaffolding/t2_tenant_operators/single_sub_tenant_v0_1"
                                                         },
                                                         {
-                                                            "spaceName": "business-bank",
+                                                            "envName": "business-bank",
                                                             "operatorUri": "../../../../src/modules/scaffolding/t2_tenant_operators/single_sub_tenant_v0_1"
                                                         }
                                                     ]
@@ -260,40 +260,40 @@
                 }
             },
             "post": {
-                "summary": "CREATE a new Space",
-                "description": "This operation creates a new - and Unique - Space",
-                "operationId": "delete-NewSpace",
+                "summary": "CREATE a new Environment",
+                "description": "This operation creates a new - and Unique - Environment",
+                "operationId": "delete-NewEnvironment",
                 "tags": [
-                    "Spaces"
+                    "Environments"
                 ],
                 "parameters": [],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/spaceCreationObject"
+                                "$ref": "#/components/schemas/envCreationObject"
                             },
                             "examples": {
                                 "createCore": {
                                     "value": {
-                                        "spaceKindObject": {
-                                            "spaceKind": "core",
-                                            "spaceLayer": "0"
+                                        "envKindObject": {
+                                            "envKind": "core",
+                                            "envLayer": "0"
                                         },
-                                        "spaceObject": {
-                                            "spaceName": "preview",
+                                        "envObject": {
+                                            "envName": "preview",
                                             "operatorUri": "../../../src/modules/scaffolding/t0_kore_operators/single_sub_kore_v0_1"
                                         }
                                     }
                                 },
                                 "createTenant": {
                                     "value": {
-                                        "spaceKindObject": {
-                                            "spaceKind": "tenant",
-                                            "spaceLayer": "2"
+                                        "envKindObject": {
+                                            "envKind": "tenant",
+                                            "envLayer": "2"
                                         },
-                                        "spaceObject": {
-                                            "spaceName": "business-bank",
+                                        "envObject": {
+                                            "envName": "business-bank",
                                             "operatorUri": "../../../../src/modules/scaffolding/t2_tenant_operators/single_sub_tenant_v0_1"
                                         }
                                     }
@@ -309,17 +309,17 @@
                 }
             }
         },
-        "/spaces/{UniqueSpaceName}/stages": {
+        "/environments/{UniqueEnvName}/stages": {
             "get": {
-                "summary": "GET Space Stages",
-                "description": "Returns a list of Stages within the specified Space",
-                "operationId": "get-StagesForSpace",
+                "summary": "GET Environment Stages",
+                "description": "Returns a list of Stages within the specified Environment",
+                "operationId": "get-StagesForEnvironment",
                 "tags": [
                     "Stages"
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     }
                 ],
                 "responses": {
@@ -331,7 +331,7 @@
                                     "$ref": "#/components/schemas/stageObjectList"
                                 },
                                 "examples": {
-                                    "KernelSpaceStages": {
+                                    "KernelEnvironmentStages": {
                                         "value": {
                                             "stageObjectList": [
                                                 {
@@ -369,15 +369,15 @@
                 }
             },
             "post": {
-                "summary": "Create a new Stage within a Space",
+                "summary": "Create a new Stage within an Environment",
                 "description": "Creates a new Stage Object",
-                "operationId": "create-NewStageForSpace",
+                "operationId": "create-NewStageForEnvironment",
                 "tags": [
                     "Stages"
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     }
                 ],
                 "requestBody": {
@@ -414,17 +414,17 @@
                 }
             }
         },
-        "/spaces/{UniqueSpaceName}/stages/{UniqueStageName}/change/delete": {
+        "/environments/{UniqueEnvName}/stages/{UniqueStageName}/change/delete": {
             "delete": {
-                "summary": "FAIL SAFE: DELETE a Stage within a Space",
-                "description": "Delete a specific Stage Object within the Space. This is a very distructive operation and recovery is difficult to achieve and will be dependent on the sophistication of the operator. By default this endpoint is rendered safe - by defaulting the change mode to - plan. The default execution of this endpoint SHOULD ONLY calculate the destroy plan",
-                "operationId": "delete-StageFromSpace",
+                "summary": "FAIL SAFE: DELETE a Stage within an Environment",
+                "description": "Delete a specific Stage Object within the Environment. This is a very distructive operation and recovery is difficult to achieve and will be dependent on the sophistication of the operator. By default this endpoint is rendered safe - by defaulting the change mode to - plan. The default execution of this endpoint SHOULD ONLY calculate the destroy plan",
+                "operationId": "delete-StageFromEnvironment",
                 "tags": [
                     "Stages"
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     },
                     {
                         "$ref": "#/components/parameters/UniqueStageName"
@@ -443,7 +443,7 @@
                 }
             }
         },
-        "/spaces/{UniqueSpaceName}/stages/{UniqueStageName}/change/plan": {
+        "/environments/{UniqueEnvName}/stages/{UniqueStageName}/change/plan": {
             "get": {
                 "summary": "Calculate the Change Plan for the change boundary (Stage)",
                 "description": "This endpoint will calculate the change plan for the change boundary being addressed via the path parameters",
@@ -453,7 +453,7 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     },
                     {
                         "$ref": "#/components/parameters/UniqueStageName"
@@ -469,7 +469,7 @@
                 }
             }
         },
-        "/spaces/{UniqueSpaceName}/stages/{UniqueStageName}/change/apply": {
+        "/environments/{UniqueEnvName}/stages/{UniqueStageName}/change/apply": {
             "put": {
                 "summary": "FAIL SAFE: Calculate and Apply the Change Plan for the change boundary (Stage)",
                 "description": "This endpoint will calculate and Apply the change plan for the change boundary being addressed via the path parameters. This endpoint is designed to fail safe and as such - the change mode parameter MUST be set to 'apply' in order for changes to actually be applied",
@@ -479,7 +479,7 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     },
                     {
                         "$ref": "#/components/parameters/UniqueStageName"
@@ -498,17 +498,17 @@
                 }
             }
         },
-        "/spaces/{UniqueSpaceName}/deploymentSpaces": {
+        "/environments/{UniqueEnvName}/deploymentSpaces": {
             "get": {
-                "summary": "Returns the list of Deployment Spaces configured for the space",
-                "description": "Each Space consists of a set of deployment spaces. Each deployment space is where Cloud Resources are actually deployed and forms the change control boundary. The Deployment Spaces representes the full addressable scope within the space. This set of deployment spaces is delegated to either a single team, or it can be segmented across multiple teams.",
+                "summary": "Returns the list of Deployment Spaces configured for the Environment",
+                "description": "Each Environment consists of a set of deployment spaces. Each deployment space is where Cloud Resources are actually deployed and forms the change control boundary. The Deployment Spaces representes the full addressable scope within the Environment. This set of deployment spaces is delegated to either a single team, or it can be segmented across multiple teams.",
                 "operationId": "get-DeploymentSpaces",
                 "tags": [
-                    "Spaces"
+                    "Environments"
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     }
                 ],
                 "responses": {
@@ -525,15 +525,15 @@
                 }
             },
             "put": {
-                "summary": "Set the list of deployment spaces for the space",
-                "description": "This endpoint manages the configuration for the deployment spaces that will be Idempotently managed and applied across all stages within this Space",
+                "summary": "Set the list of deployment spaces for the Environment",
+                "description": "This endpoint manages the configuration for the deployment spaces that will be Idempotently managed and applied across all stages within this Environment",
                 "operationId": "set-DeploymentSpaces",
                 "tags": [
-                    "Spaces"
+                    "Environments"
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     }
                 ],
                 "requestBody": {
@@ -552,17 +552,17 @@
                 }
             }
         },
-        "/spaces/{UniqueSpaceName}/teams": {
+        "/environments/{UniqueEnvName}/teams": {
             "get": {
-                "summary": "Returns a list of teams for the Space",
-                "description": "This endpoint is responsible for replying with the list of teams that have been granted specific ownership/privileges over a specific scope within the space. This scope must be ",
-                "operationId": "get-TeamsForSpace",
+                "summary": "Returns a list of teams for the Environment",
+                "description": "This endpoint is responsible for replying with the list of teams that have been granted specific ownership/privileges over a specific scope within the Environment. This scope must be ",
+                "operationId": "get-TeamsForEnvironment",
                 "tags": [
                     "Teams"
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     }
                 ],
                 "responses": {
@@ -579,22 +579,22 @@
                 }
             },
             "post": {
-                "summary": "CREATE New Team for Space",
-                "description": "This endpoint is responsible for replying with the list of teams that have been granted specific ownership/privileges over a specific scope within the space. This scope must be ",
-                "operationId": "set-TeamsForSpace",
+                "summary": "CREATE New Team for Environment",
+                "description": "This endpoint is responsible for replying with the list of teams that have been granted specific ownership/privileges over a specific scope within the Environment. This scope must be ",
+                "operationId": "set-TeamsForEnvironment",
                 "tags": [
                     "Teams"
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     }
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/spaceCreationObject"
+                                "$ref": "#/components/schemas/envCreationObject"
                             }
                         }
                     }
@@ -606,17 +606,17 @@
                 }
             }
         },
-        "/spaces/{UniqueSpaceName}/teams/{TeamName}/delete": {
+        "/environments/{UniqueEnvName}/teams/{TeamName}/delete": {
             "delete": {
-                "summary": "Delete a Team from the Space",
-                "description": "This endpoint is responsible for recording the desire for a Team to be removed from a Space. In order to fulfill on this intent, the PUT ../{TeamName}/change/apply endpoint needs to be called",
-                "operationId": "delete-TeamsForSpace",
+                "summary": "Delete a Team from the Environment",
+                "description": "This endpoint is responsible for recording the desire for a Team to be removed from an Environment. In order to fulfill on this intent, the PUT ../{TeamName}/change/apply endpoint needs to be called",
+                "operationId": "delete-TeamsForEnvironment",
                 "tags": [
                     "Teams"
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     },
                     {
                         "$ref": "#/components/parameters/TeamName"
@@ -639,17 +639,17 @@
                 }
             }
         },
-        "/spaces/{UniqueSpaceName}/stages/{UniqueStageName}/teams/{TeamName}/groups": {
+        "/environments/{UniqueEnvName}/stages/{UniqueStageName}/teams/{TeamName}/groups": {
             "get": {
                 "summary": "Returns a list of the Group Objects within the Team that are specific to the Stage",
-                "description": "This endpoint will reply with the list of Groups as defined in the Entitlement Operator that has been assigned to the Stage within this Space",
+                "description": "This endpoint will reply with the list of Groups as defined in the Entitlement Operator that has been assigned to the Stage within this Environment",
                 "operationId": "get-TeamGroups",
                 "tags": [
                     "Teams"
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     },
                     {
                         "$ref": "#/components/parameters/UniqueStageName"
@@ -672,7 +672,7 @@
                 }
             }
         },
-        "/spaces/{UniqueSpaceName}/stages/{UniqueStageName}/teams/{TeamName}/change/plan": {
+        "/environments/{UniqueEnvName}/stages/{UniqueStageName}/teams/{TeamName}/change/plan": {
             "get": {
                 "summary": "Calculate the Change Plan for the Entitlelement Bindings that will be applied to the change boundary (Stage)",
                 "description": "This Endpoint will calculate the entitlement change plan that will be applied to the change boundary defined at this stage and for the deployment spaces within the Teams ownership",
@@ -682,7 +682,7 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     },
                     {
                         "$ref": "#/components/parameters/UniqueStageName"
@@ -701,7 +701,7 @@
                 }
             }
         },
-        "/spaces/{UniqueSpaceName}/stages/{UniqueStageName}/teams/{TeamName}/change/apply": {
+        "/environments/{UniqueEnvName}/stages/{UniqueStageName}/teams/{TeamName}/change/apply": {
             "put": {
                 "summary": "FAIL SAFE: Calculate and Apply the Change Plan for the Entitlelement Bindings that will be applied to the change boundary (Stage)",
                 "description": "This Endpoint will calculate & apply the entitlement change plan that will be applied to the change boundary defined at this stage and for the deployment spaces within the Teams ownership.",
@@ -711,7 +711,7 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     },
                     {
                         "$ref": "#/components/parameters/UniqueStageName"
@@ -733,7 +733,7 @@
                 }
             }
         },
-        "/spaces/{UniqueSpaceName}/stages/{UniqueStageName}/teams/{TeamName}/members/{GroupName}": {
+        "/environments/{UniqueEnvName}/stages/{UniqueStageName}/teams/{TeamName}/members/{GroupName}": {
             "get": {
                 "summary": "Get the team members for the group for a specific stage",
                 "description": "",
@@ -743,7 +743,7 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     },
                     {
                         "$ref": "#/components/parameters/UniqueStageName"
@@ -762,17 +762,17 @@
                 }
             }
         },
-        "/spaces/{UniqueSpaceName}/operators": {
+        "/environments/{UniqueEnvName}/operators": {
             "patch": {
-                "summary": "MODIFY the VERSION of an Operator of a specific Kind for a specific Space",
-                "description": "The Operator performs the inversion of dependency on the cloud provider. When a Space is being changed - the Operator contains this logic/knowledge - and must be set at the space level before it can then be applied gradually across the stages. This operation will send a space object that contains the unique name of the space and the operator uri - the operator uri is a fully qualified resource",
-                "operationId": "update-OperatorVersionForSpace",
+                "summary": "MODIFY the VERSION of an Operator of a specific Kind for a specific Environment",
+                "description": "The Operator performs the inversion of dependency on the cloud provider. When an Environment is being changed - the Operator contains this logic/knowledge - and must be set at the Environment level before it can then be applied gradually across the stages. This operation will send an Environment object that contains the unique name of the Environment and the operator uri - the operator uri is a fully qualified resource",
+                "operationId": "update-OperatorVersionForEnvironment",
                 "tags": [
-                    "DigitalOperators"
+                    "Operators"
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/UniqueSpaceName"
+                        "$ref": "#/components/parameters/UniqueEnvName"
                     },
                     {
                         "$ref": "#/components/parameters/OperatorKind"
@@ -815,7 +815,7 @@
                 "description": "This endpoint returns all opertors that the API Server knows about. This is the full list of Operators and is intended to grow as the community adds/extends operators across clouds, tooling, kinds and versions ",
                 "operationId": "get-KnownOperators",
                 "tags": [
-                    "DigitalOperators"
+                    "Operators"
                 ],
                 "parameters": [
                     {
@@ -911,7 +911,7 @@
                 "description": "This endpoint will REGISTER new Operators with the API Server",
                 "operationId": "register-OperatorInstance",
                 "tags": [
-                    "DigitalOperators"
+                    "Operators"
                 ],
                 "parameters": [],
                 "requestBody": {
@@ -936,7 +936,7 @@
                 "description": "Returns the list of Operators that are Registered with this API Server Instance. These Operators are available for use within the Control Plane. ",
                 "operationId": "get-RegisteredOperators",
                 "tags": [
-                    "DigitalOperators"
+                    "Operators"
                 ],
                 "parameters": [
                     {
@@ -966,7 +966,7 @@
                 "description": "This endpoint will UNREGISTER new Operators with the API Server",
                 "operationId": "unregister-OperatorInstance",
                 "tags": [
-                    "DigitalOperators"
+                    "Operators"
                 ],
                 "parameters": [],
                 "requestBody": {
@@ -991,7 +991,7 @@
                 "description": "The API Server has a dependecy inversion with respect to the management of any cloud. The Operator Resource is the method by which the continued evolution and expansion of Cloud Management can occur and the API Server can 'git-pull' into its operational scope.",
                 "operationId": "get-OperatorRepos",
                 "tags": [
-                    "DigitalOperators"
+                    "Operators"
                 ],
                 "parameters": [],
                 "responses": {
@@ -1012,7 +1012,7 @@
                 "description": "The API Server has a dependecy inversion with respect to the management of any cloud. The Operator Resource is the method by which the continued evolution and expansion of Cloud Management can occur and the API Server can 'git-pull' into its operational scope.",
                 "operationId": "set-OperatorRepo",
                 "tags": [
-                    "DigitalOperators"
+                    "Operators"
                 ],
                 "parameters": [],
                 "responses": {
@@ -1035,7 +1035,7 @@
                 "description": "The API Server has a dependecy inversion with respect to the management of any cloud. The Operator Resource is the method by which the continued evolution and expansion of Cloud Management can occur and the API Server can 'git-pull' into its operational scope.",
                 "operationId": "gitpull-OperatorRepo",
                 "tags": [
-                    "DigitalOperators"
+                    "Operators"
                 ],
                 "parameters": [
                     {
@@ -1152,14 +1152,14 @@
     },
     "components": {
         "schemas": {
-            "spaceName": {
-                "title": "spaceName",
-                "description": "The Space Name MUST BE a 'globally unique identifier' for a boundary of ownership and responsibility within the enterprise graph. It is the responsibility of the Enterprise Cloud API Server to maintain the name uniqueness across the graph.",
+            "envName": {
+                "title": "envName",
+                "description": "The Environment Name MUST BE a 'globally unique identifier' for a boundary of ownership and responsibility within the enterprise graph. It is the responsibility of the Enterprise Cloud API Server to maintain the name uniqueness across the graph.",
                 "type": "string"
             },
-            "spaceKind": {
-                "title": "spaceKind",
-                "description": "The Enterprise Graph consists of uniquely identifiable spaces within a cloud provider. Each space is of a specific kind, of which there are only a discrete number. The kinds reflect the layered architecture where by impact and probability (of failure/breach) can be explicitly managed. The Core has the maximum service impact and therefore should be reserved for inherently resilient/available Cloud services or non-runtime essential services such as an IPAM. The Kernel space is reserved for services that are shared across tenants an that require resilience/availability that is greater than any single cloud provider fault domain can provide. The tenant space establishes the boundary contract between the tenant and the enterprise cloud platform. It is within the tenant space that dedicated services are provisioned.",
+            "envKind": {
+                "title": "envKind",
+                "description": "The Enterprise Graph consists of uniquely identifiable Environments within a cloud provider. Each Environment is of a specific kind, of which there are only a discrete number. The kinds reflect the layered architecture where by impact and probability (of failure/breach) can be explicitly managed. The Core has the maximum service impact and therefore should be reserved for inherently resilient/available Cloud services or non-runtime essential services such as an IPAM. The Kernel Environment is reserved for services that are shared across tenants an that require resilience/availability that is greater than any single cloud provider fault domain can provide. The tenant Environment establishes the boundary contract between the tenant and the enterprise cloud platform. It is within the tenant Environment that dedicated services are provisioned.",
                 "type": "string",
                 "enum": [
                     "core",
@@ -1167,9 +1167,9 @@
                     "tenant"
                 ]
             },
-            "spaceLayer": {
-                "title": "spaceLayer",
-                "description": "The primary objective for introducing a Layering constraint into the architecture is to induce a level of decoupling. The layers equate to the Space Kinds where 0 = core, 1 = kernel and 2 = tenant",
+            "envLayer": {
+                "title": "envLayer",
+                "description": "The primary objective for introducing a Layering constraint into the architecture is to induce a level of decoupling. The layers equate to the Environment Kinds where 0 = core, 1 = kernel and 2 = tenant",
                 "type": "string",
                 "enum": [
                     "0",
@@ -1177,16 +1177,16 @@
                     "2"
                 ]
             },
-            "spaceKindObject": {
-                "title": "spaceKindObject",
-                "description": "The Enterprise Graph consists of uniquely identifiable spaces within a cloud provider. Each space is of a specific kind, of which there are only a discrete number.",
+            "envKindObject": {
+                "title": "envKindObject",
+                "description": "The Enterprise Graph consists of uniquely identifiable Environments within a cloud provider. Each Environment is of a specific kind, of which there are only a discrete number.",
                 "type": "object",
                 "properties": {
-                    "spaceKind": {
-                        "$ref": "#/components/schemas/spaceKind"
+                    "envKind": {
+                        "$ref": "#/components/schemas/envKind"
                     },
-                    "spaceLayer": {
-                        "$ref": "#/components/schemas/spaceLayer"
+                    "envLayer": {
+                        "$ref": "#/components/schemas/envLayer"
                     }
                 },
                 "enum": [
@@ -1204,48 +1204,48 @@
                     }
                 ]
             },
-            "spaceObject": {
-                "title": "spaceObject",
-                "description": "A Space Object consists of its unique name and its immutable and versioned operator uri. The unique name provides the space's location within the Graph and the uri is the pointer to the instantiation of its 'SpaceKind' within the graph. This object is loosely typed so that all implementation details are inverted from the graph so that the interaction model can remain declarative",
+            "envObject": {
+                "title": "envObject",
+                "description": "An Environment Object consists of its unique name and its immutable and versioned operator uri. The unique name provides the Environment's location within the Graph and the uri is the pointer to the instantiation of its 'envKind' within the graph. This object is loosely typed so that all implementation details are inverted from the graph so that the interaction model can remain declarative",
                 "type": "object",
                 "properties": {
-                    "spaceName": {
-                        "$ref": "#/components/schemas/spaceName"
+                    "envName": {
+                        "$ref": "#/components/schemas/envName"
                     },
                     "operatorUri": {
                         "$ref": "#/components/schemas/operatorUri"
                     }
                 }
             },
-            "spaceCreationObject": {
-                "title": "spaceCreationObject",
-                "description": "When creating a new Space within the Enterprise Graph - a spaceCreationObject is used. This object consists of the uniquely identifiable name and the uri to the operator that will instantiate the config for this instance of the operator kind. The spaceKindObject tells the API server what type of space is being requested so that this can be appropriately 'placed'",
+            "envCreationObject": {
+                "title": "envCreationObject",
+                "description": "When creating a new Environment within the Enterprise Graph - a envCreationObject is used. This object consists of the uniquely identifiable name and the uri to the operator that will instantiate the config for this instance of the operator kind. The envKindObject tells the API server what type of Environment is being requested so that this can be appropriately 'placed'",
                 "type": "object",
                 "properties": {
-                    "spaceKindObject": {
-                        "$ref": "#/components/schemas/spaceKindObject"
+                    "envKindObject": {
+                        "$ref": "#/components/schemas/envKindObject"
                     },
-                    "spaceObject": {
-                        "$ref": "#/components/schemas/spaceObject"
+                    "envObject": {
+                        "$ref": "#/components/schemas/envObject"
                     }
                 }
             },
-            "spaceObjectList": {
-                "title": "spaceObjectList",
-                "description": "This represents a list of Space Objects",
+            "envObjectList": {
+                "title": "envObjectList",
+                "description": "This represents a list of Environment Objects",
                 "type": "array",
                 "items": {
                     "type": "object",
                     "properties": {
-                        "spaceObject": {
-                            "$ref": "#/components/schemas/spaceObject"
+                        "envObject": {
+                            "$ref": "#/components/schemas/envObject"
                         }
                     }
                 }
             },
             "deploymentSpace": {
                 "title": "deploymentSpace",
-                "description": "A String representing the identifier for a single deployment space. This deployment space will be created in each Stage within this Space and will be identified by the 'stage-deploymentSpace' identifier",
+                "description": "A String representing the identifier for a single deployment space. This deployment space will be created in each Stage within this Environment and will be identified by the 'stage-deploymentSpace' identifier",
                 "type": "string"
             },
             "deploymentSpaceList": {
@@ -1263,7 +1263,7 @@
             },
             "stageName": {
                 "title": "stageName",
-                "description": "The Stage is an object that serves the purpose of limiting the change/blast radius within a specific spaceObject. Change is propagated through out the spaceObject by sequentially applying changes to each Stage. Spaces and Stages are the primary primitives that support fault tolerance by virture of partitions. Location is either explicit or inherited dependent on the SpaceKind",
+                "description": "The Stage is an object that serves the purpose of limiting the change/blast radius within a specific envObject. Change is propagated through out the envObject by sequentially applying changes to each Stage. Environments and Stages are the primary primitives that support fault tolerance by virture of partitions. Location is either explicit or inherited dependent on the envKind",
                 "type": "string"
             },
             "stageDependency": {
@@ -1273,12 +1273,12 @@
             },
             "stageChangeSequence": {
                 "title": "stageChangeSequence",
-                "description": "All change is confined to a stage within a space. Change propagates through out a space by sequentially being applied one stage at a time. The intent is to establish a level of Determinisim regarding change which is why there is a stageSequence value. The order of change plays a critical role in establishing repeatable changes and also for applying an upgrate strategy that manages the exposure of the system to teh effects of continual change",
+                "description": "All change is confined to a stage within an Environment. Change propagates through out an Environment by sequentially being applied one stage at a time. The intent is to establish a level of Determinisim regarding change which is why there is a stageSequence value. The order of change plays a critical role in establishing repeatable changes and also for applying an upgrate strategy that manages the exposure of the system to teh effects of continual change",
                 "type": "string"
             },
             "currentStageOperator": {
                 "title": "currentStageOperator",
-                "description": "When each Stage is created, the Operator that has been declared at the space object level - is applied. The Operator pattern is intended to be open for extension by virtue of immutable version management. Once a Space is created with a specific Operator Instance - the Tooling, Cloud, or Operator Type (Name) CANNOT CHANGE. The Version however, can change.",
+                "description": "When each Stage is created, the Operator that has been declared at the Environment object level - is applied. The Operator pattern is intended to be open for extension by virtue of immutable version management. Once an Environment is created with a specific Operator Instance - the Tooling, Cloud, or Operator Type (Name) CANNOT CHANGE. The Version however, can change.",
                 "type": "string"
             },
             "stageObject": {
@@ -1302,12 +1302,12 @@
             },
             "stageObjectList": {
                 "title": "stageObjectList",
-                "description": "This represents a list of Space Stage Objects",
+                "description": "This represents a list of Environment Stage Objects",
                 "type": "array",
                 "items": {
                     "type": "object",
                     "properties": {
-                        "spaceObject": {
+                        "envObject": {
                             "$ref": "#/components/schemas/stageObject"
                         }
                     }
@@ -1315,7 +1315,7 @@
             },
             "operatorObject": {
                 "title": "operatorObject",
-                "description": "The operatorObject is the representation of an Operator Instance. It is a multi-Cloud, multi-Tooling & multi-Version construct that services a single purpose - the operator Name is a distinct representation of the purpose that is being served. The operator exists to serve this purpose whilst being OPEN FOR EXTENSION via many tools and across clouds whilst at the same time being CLOSED FOR MODIFICATION by virtue of the vesrioning construct",
+                "description": "The operatorObject is the representation of a Digital Operator Instance. It is a multi-Cloud, multi-Tooling & multi-Version construct that services a single purpose - the operator Name is a distinct representation of the purpose that is being served. The operator exists to serve this purpose whilst being OPEN FOR EXTENSION via many tools and across clouds whilst at the same time being CLOSED FOR MODIFICATION by virtue of the vesrioning construct",
                 "type": "object",
                 "properties": {
                     "operatorName": {
@@ -1443,7 +1443,7 @@
             },
             "teamScope": {
                 "title": "teamScope",
-                "description": "The team is a delegation construct that exists for the purpose of managing a specific scope of deployment spaces within a cloud space. This scope can either be the full set of deployment spaces or a subset",
+                "description": "The team is a delegation construct that exists for the purpose of managing a specific scope of deployment spaces within a cloud Environment. This scope can either be the full set of deployment spaces or a subset",
                 "type": "array",
                 "items": {
                     "type": "object",
@@ -1598,10 +1598,10 @@
             }
         },
         "parameters": {
-            "UniqueSpaceName": {
-                "name": "UniqueSpaceName",
+            "UniqueEnvName": {
+                "name": "UniqueEnvName",
                 "in": "path",
-                "description": "This the Unique Name for the Space",
+                "description": "This the Unique Name for the Environment",
                 "required": true,
                 "schema": {
                     "type": "string"
@@ -1610,7 +1610,7 @@
             "UniqueStageName": {
                 "name": "UniqueStageName",
                 "in": "path",
-                "description": "This the Unique Name for the Stage within the Space",
+                "description": "This the Unique Name for the Stage within the Environment",
                 "required": true,
                 "schema": {
                     "type": "string"
@@ -1728,7 +1728,7 @@
             "TeamName": {
                 "name": "TeamName",
                 "in": "path",
-                "description": "This the Unique Name for the Team specific to a Space",
+                "description": "This the Unique Name for the Team specific to an Environment",
                 "required": true,
                 "schema": {
                     "type": "string"
@@ -1737,7 +1737,7 @@
             "GroupName": {
                 "name": "GroupName",
                 "in": "path",
-                "description": "This the Unique Name for the Group within the Team specific to a Stage within a Space",
+                "description": "This the Unique Name for the Group within the Team specific to a Stage within an Environment",
                 "required": true,
                 "schema": {
                     "type": "string"
