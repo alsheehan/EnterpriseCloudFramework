@@ -24,7 +24,8 @@
                         "aws",
                         "gcp",
                         "kube",
-                        "vmware"
+                        "vmware",
+                        "all"
                     ]
                 }
             }
@@ -37,7 +38,7 @@
                 "description": "TODO: Create Examples that convey dependency - the change sequence must also be informational. The Enterprise Graph represents the global view of all governed Environments within a specific: <br> <div> <li> <b> Enterprise Cloud platformName </b> (representing the enterprise's platform name for the version or generation of service offering) & <div/> <div> <li> <b>Public/Private Cloud providerName </b> (azr, aws, gcp etc). <div/> <br/> <br> An Environment is a multy cloud abstraction that is a unit of Governance and Accountability. <br/> <br> Each Environment is of a specific kind and consists of a sequence of stages - the purpose of which is to manage for the controlled, deterministic and reversible application of change. <br/> <br> The objective of the graph is to establish a mechanism for intentionally placing and remembering/visualising every <br> <li>Boundary of accountability, <br> <li>Stages of change within this boundary and <br> <li>The dependency graph for each stage of change<br/> so that all Enterprise consumption of   Any Cloud API's can be holistically managed and governed. <br/> <br> By definition, any usage of any Cloud API's outside of the Graph is considered unmanaged. <br/> <br>By managing the Environments and intentionally placing Stages into a Dependency Graph, the Enterprise can know and manage its risk of 'Cloud API usage' & 'Continuous Change' across any cloud",
                 "operationId": "get-GraphForEnterprise",
                 "tags": [
-                    "EnterpriseGraph"
+                    "Enterprise-Graph"
                 ],
                 "parameters": [],
                 "responses": {
@@ -61,7 +62,7 @@
                 "description": "Each Stage within an Environment has a list of 'impact stages' and 'dependency stages'. Any change that is applied to this stage has the impact radius defined. This endpoint also knows the list of stages where changes could impact this stage",
                 "operationId": "get-GraphForEnvironment",
                 "tags": [
-                    "EnterpriseGraph"
+                    "Enterprise-Graph"
                 ],
                 "parameters": [
                     {
@@ -81,7 +82,7 @@
                 "description": "Each Stage within an Environment has a list of 'impact stages' and 'dependency stages'. Any change that is applied to this stage has the impact radius defined. This endpoint also knows the list of stages where changes could impact this stage",
                 "operationId": "get-GraphForStage",
                 "tags": [
-                    "EnterpriseGraph"
+                    "Enterprise-Graph"
                 ],
                 "parameters": [
                     {
@@ -104,7 +105,7 @@
                 "description": "Returns a list of Environment Names",
                 "operationId": "get-Environments",
                 "tags": [
-                    "Environments"
+                    "Isolated-Environments"
                 ],
                 "parameters": [
                     {
@@ -264,7 +265,7 @@
                 "description": "This operation creates a new - and Unique - Environment",
                 "operationId": "delete-NewEnvironment",
                 "tags": [
-                    "Environments"
+                    "Isolated-Environments"
                 ],
                 "parameters": [],
                 "requestBody": {
@@ -315,7 +316,7 @@
                 "description": "Returns a list of Stages within the specified Environment",
                 "operationId": "get-StagesForEnvironment",
                 "tags": [
-                    "Stages"
+                    "Release-Stages"
                 ],
                 "parameters": [
                     {
@@ -373,7 +374,7 @@
                 "description": "Creates a new Stage Object",
                 "operationId": "create-NewStageForEnvironment",
                 "tags": [
-                    "Stages"
+                    "Release-Stages"
                 ],
                 "parameters": [
                     {
@@ -420,7 +421,7 @@
                 "description": "Delete a specific Stage Object within the Environment. This is a very distructive operation and recovery is difficult to achieve and will be dependent on the sophistication of the operator. By default this endpoint is rendered safe - by defaulting the change mode to - plan. The default execution of this endpoint SHOULD ONLY calculate the destroy plan",
                 "operationId": "delete-StageFromEnvironment",
                 "tags": [
-                    "Stages"
+                    "Release-Stages"
                 ],
                 "parameters": [
                     {
@@ -449,7 +450,7 @@
                 "description": "This endpoint will calculate the change plan for the change boundary being addressed via the path parameters",
                 "operationId": "calculate-ChangePlanForStage",
                 "tags": [
-                    "Stages"
+                    "Release-Stages"
                 ],
                 "parameters": [
                     {
@@ -475,7 +476,7 @@
                 "description": "This endpoint will calculate and Apply the change plan for the change boundary being addressed via the path parameters. This endpoint is designed to fail safe and as such - the change mode parameter MUST be set to 'apply' in order for changes to actually be applied",
                 "operationId": "calculateAndApply-ChangePlanForStage",
                 "tags": [
-                    "Stages"
+                    "Release-Stages"
                 ],
                 "parameters": [
                     {
@@ -504,7 +505,7 @@
                 "description": "Each Environment consists of a set of deployment spaces. Each deployment space is where Cloud Resources are actually deployed and forms the change control boundary. The Deployment Spaces representes the full addressable scope within the Environment. This set of deployment spaces is delegated to either a single team, or it can be segmented across multiple teams.",
                 "operationId": "get-DeploymentSpaces",
                 "tags": [
-                    "Environments"
+                    "Isolated-Environments"
                 ],
                 "parameters": [
                     {
@@ -529,7 +530,7 @@
                 "description": "This endpoint manages the configuration for the deployment spaces that will be Idempotently managed and applied across all stages within this Environment",
                 "operationId": "set-DeploymentSpaces",
                 "tags": [
-                    "Environments"
+                    "Isolated-Environments"
                 ],
                 "parameters": [
                     {
@@ -558,7 +559,7 @@
                 "description": "This endpoint is responsible for replying with the list of teams that have been granted specific ownership/privileges over a specific scope within the Environment. This scope must be ",
                 "operationId": "get-TeamsForEnvironment",
                 "tags": [
-                    "Teams"
+                    "Secure-Teams"
                 ],
                 "parameters": [
                     {
@@ -583,7 +584,7 @@
                 "description": "This endpoint is responsible for replying with the list of teams that have been granted specific ownership/privileges over a specific scope within the Environment. This scope must be ",
                 "operationId": "set-TeamsForEnvironment",
                 "tags": [
-                    "Teams"
+                    "Secure-Teams"
                 ],
                 "parameters": [
                     {
@@ -612,7 +613,7 @@
                 "description": "This endpoint is responsible for recording the desire for a Team to be removed from an Environment. In order to fulfill on this intent, the PUT ../{TeamName}/change/apply endpoint needs to be called",
                 "operationId": "delete-TeamsForEnvironment",
                 "tags": [
-                    "Teams"
+                    "Secure-Teams"
                 ],
                 "parameters": [
                     {
@@ -645,7 +646,7 @@
                 "description": "This endpoint will reply with the list of Groups as defined in the Entitlement Operator that has been assigned to the Stage within this Environment",
                 "operationId": "get-TeamGroups",
                 "tags": [
-                    "Teams"
+                    "Secure-Teams"
                 ],
                 "parameters": [
                     {
@@ -678,7 +679,7 @@
                 "description": "This Endpoint will calculate the entitlement change plan that will be applied to the change boundary defined at this stage and for the deployment spaces within the Teams ownership",
                 "operationId": "calculate-ChangePlanForTeamAtStage",
                 "tags": [
-                    "Teams"
+                    "Secure-Teams"
                 ],
                 "parameters": [
                     {
@@ -707,7 +708,7 @@
                 "description": "This Endpoint will calculate & apply the entitlement change plan that will be applied to the change boundary defined at this stage and for the deployment spaces within the Teams ownership.",
                 "operationId": "calculateAndApply-ChangePlanForTeamAtStage",
                 "tags": [
-                    "Teams"
+                    "Secure-Teams"
                 ],
                 "parameters": [
                     {
@@ -739,7 +740,7 @@
                 "description": "",
                 "operationId": "get-TeamMembers",
                 "tags": [
-                    "Teams"
+                    "Secure-Teams"
                 ],
                 "parameters": [
                     {
@@ -768,7 +769,7 @@
                 "description": "The Operator performs the inversion of dependency on the cloud provider. When an Environment is being changed - the Operator contains this logic/knowledge - and must be set at the Environment level before it can then be applied gradually across the stages. This operation will send an Environment object that contains the unique name of the Environment and the operator uri - the operator uri is a fully qualified resource",
                 "operationId": "update-OperatorVersionForEnvironment",
                 "tags": [
-                    "Operators"
+                    "Operator-Interfaces"
                 ],
                 "parameters": [
                     {
@@ -815,7 +816,7 @@
                 "description": "This endpoint returns all opertors that the API Server knows about. This is the full list of Operators and is intended to grow as the community adds/extends operators across clouds, tooling, kinds and versions ",
                 "operationId": "get-KnownOperators",
                 "tags": [
-                    "Operators"
+                    "Operator-Interfaces"
                 ],
                 "parameters": [
                     {
@@ -911,7 +912,7 @@
                 "description": "This endpoint will REGISTER new Operators with the API Server",
                 "operationId": "register-OperatorInstance",
                 "tags": [
-                    "Operators"
+                    "Operator-Interfaces"
                 ],
                 "parameters": [],
                 "requestBody": {
@@ -936,7 +937,7 @@
                 "description": "Returns the list of Operators that are Registered with this API Server Instance. These Operators are available for use within the Control Plane. ",
                 "operationId": "get-RegisteredOperators",
                 "tags": [
-                    "Operators"
+                    "Operator-Interfaces"
                 ],
                 "parameters": [
                     {
@@ -966,7 +967,7 @@
                 "description": "This endpoint will UNREGISTER new Operators with the API Server",
                 "operationId": "unregister-OperatorInstance",
                 "tags": [
-                    "Operators"
+                    "Operator-Interfaces"
                 ],
                 "parameters": [],
                 "requestBody": {
@@ -991,7 +992,7 @@
                 "description": "The API Server has a dependecy inversion with respect to the management of any cloud. The Operator Resource is the method by which the continued evolution and expansion of Cloud Management can occur and the API Server can 'git-pull' into its operational scope.",
                 "operationId": "get-OperatorRepos",
                 "tags": [
-                    "Operators"
+                    "Operator-Interfaces"
                 ],
                 "parameters": [],
                 "responses": {
@@ -1012,7 +1013,7 @@
                 "description": "The API Server has a dependecy inversion with respect to the management of any cloud. The Operator Resource is the method by which the continued evolution and expansion of Cloud Management can occur and the API Server can 'git-pull' into its operational scope.",
                 "operationId": "set-OperatorRepo",
                 "tags": [
-                    "Operators"
+                    "Operator-Interfaces"
                 ],
                 "parameters": [],
                 "responses": {
@@ -1035,7 +1036,7 @@
                 "description": "The API Server has a dependecy inversion with respect to the management of any cloud. The Operator Resource is the method by which the continued evolution and expansion of Cloud Management can occur and the API Server can 'git-pull' into its operational scope.",
                 "operationId": "gitpull-OperatorRepo",
                 "tags": [
-                    "Operators"
+                    "Operator-Interfaces"
                 ],
                 "parameters": [
                     {
@@ -1055,7 +1056,7 @@
                 "description": "A Public Cloud is an API surface that is constantly evolving (expanding, contracting and changing). In order to know an manage the risk of using a public cloud - the continuous assurance must be capable of identifying and reassessing its measure of safety against the dynamic state of this API Surface",
                 "operationId": "get-PublicClouds",
                 "tags": [
-                    "PublicClouds"
+                    "PublicCloud-Interfaces"
                 ],
                 "parameters": [],
                 "responses": {
@@ -1076,7 +1077,7 @@
                 "description": "The API Server has a dependecy inversion with respect to the management of any cloud. The Operator Resource is the method by which the continued evolution and expansion of Cloud Management can occur and the API Server can 'git-pull' into its operational scope.",
                 "operationId": "set-PublicCloud",
                 "tags": [
-                    "PublicClouds"
+                    "PublicCloud-Interfaces"
                 ],
                 "parameters": [],
                 "requestBody": {
@@ -1095,13 +1096,13 @@
                 }
             }
         },
-        "/publicClouds/{PublicCloudAPISpecName}/assurance": {
+        "/publicClouds/{PublicCloudAPISpecName}/continuous/assurance": {
             "get": {
                 "summary": "Returns a list of Public Clouds Continuous Assurance Objects that this API Server is Continually Assuring",
                 "description": "A Public Cloud is an API surface that is constantly evolving (expanding, contracting and changing). In order to know an manage the risk of using a public cloud - the continuous assurance must be capable of identifying and reassessing its measure of safety against the dynamic state of this API Surface",
                 "operationId": "get-ContinuousAssuranceObjects",
                 "tags": [
-                    "PublicClouds"
+                    "PublicCloud-Interfaces"
                 ],
                 "parameters": [
                     {
@@ -1126,7 +1127,7 @@
                 "description": "The API Server has a dependecy inversion with respect to the management of any cloud. The Operator Resource is the method by which the continued evolution and expansion of Cloud Management can occur and the API Server can 'git-pull' into its operational scope.",
                 "operationId": "set-ContinuousAssuranceObject",
                 "tags": [
-                    "PublicClouds"
+                    "PublicCloud-Interfaces"
                 ],
                 "parameters": [
                     {
