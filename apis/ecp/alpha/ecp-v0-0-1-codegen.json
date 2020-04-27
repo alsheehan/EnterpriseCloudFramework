@@ -12,11 +12,11 @@
         {
             "url": "https://api.server.test/apis/v1/platform/enterprise-Cloud-Demo/providers/azr",
             "variables": {
-                "platformName": {
+                "ec_instance": {
                     "default": "enterprise-Cloud-Demo",
                     "description": "The name given to the Enterprise Cloud Platform within the organisation - this variable allows for the Enterprise Cloud service offering to evolve over time as new implementations benefit from greater learning and more powerful cloud innovation"
                 },
-                "providerName": {
+                "public_clouds": {
                     "description": "The type of Cloud Provider API that this API Server provides Control plane services for",
                     "default": "azr",
                     "enum": [
@@ -35,7 +35,7 @@
         "/enterpriseGraph": {
             "get": {
                 "summary": "GET the Enterprise Graph of Dependencies",
-                "description": "TODO: Create Examples that convey dependency - the change sequence must also be informational. The Enterprise Graph represents the global view of all governed Environments within a specific: <br> <div> <li> <b> Enterprise Cloud platformName </b> (representing the enterprise's platform name for the version or generation of service offering) & <div/> <div> <li> <b>Public/Private Cloud providerName </b> (azr, aws, gcp etc). <div/> <br/> <br> An Environment is a multy cloud abstraction that is a unit of Governance and Accountability. <br/> <br> Each Environment is of a specific kind and consists of a sequence of stages - the purpose of which is to manage for the controlled, deterministic and reversible application of change. <br/> <br> The objective of the graph is to establish a mechanism for intentionally placing and remembering/visualising every <br> <li>Boundary of accountability, <br> <li>Stages of change within this boundary and <br> <li>The dependency graph for each stage of change<br/> so that all Enterprise consumption of   Any Cloud API's can be holistically managed and governed. <br/> <br> By definition, any usage of any Cloud API's outside of the Graph is considered unmanaged. <br/> <br>By managing the Environments and intentionally placing Stages into a Dependency Graph, the Enterprise can know and manage its risk of 'Cloud API usage' & 'Continuous Change' across any cloud",
+                "description": "TODO: Create Examples that convey dependency - the change sequence must also be informational. The Enterprise Graph represents the global view of all governed Environments within a specific: <br> <div> <li> <b> Enterprise Cloud ec_instance </b> (representing the enterprise's platform name for the version or generation of service offering) & <div/> <div> <li> <b>Public/Private Cloud public_clouds </b> (azr, aws, gcp etc). <div/> <br/> <br> An Environment is a multy cloud abstraction that is a unit of Governance and Accountability. <br/> <br> Each Environment is of a specific kind and consists of a sequence of stages - the purpose of which is to manage for the controlled, deterministic and reversible application of change. <br/> <br> The objective of the graph is to establish a mechanism for intentionally placing and remembering/visualising every <br> <li>Boundary of accountability, <br> <li>Stages of change within this boundary and <br> <li>The dependency graph for each stage of change<br/> so that all Enterprise consumption of   Any Cloud API's can be holistically managed and governed. <br/> <br> By definition, any usage of any Cloud API's outside of the Graph is considered unmanaged. <br/> <br>By managing the Environments and intentionally placing Stages into a Dependency Graph, the Enterprise can know and manage its risk of 'Cloud API usage' & 'Continuous Change' across any cloud",
                 "operationId": "get-GraphForEnterprise",
                 "tags": [
                     "Enterprise-Graph"
